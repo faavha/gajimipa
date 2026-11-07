@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Employee;
 use App\Models\SalaryPeriod;
+use App\Models\SalaryRecord;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
@@ -72,7 +73,7 @@ class SalaryImportTest extends TestCase
 
     private function makeExcelUpload(array $rows, string $filename = 'gaji_pusat.xlsx'): UploadedFile
     {
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
         $sheet = $spreadsheet->getActiveSheet();
 
         foreach ($rows as $rowIndex => $row) {
@@ -256,7 +257,7 @@ class SalaryImportTest extends TestCase
         $employee = Employee::factory()->create(['nip' => '195708201985031004']);
         $period = SalaryPeriod::factory()->create(['bulan' => 8, 'tahun' => 2026]);
 
-        \App\Models\SalaryRecord::create([
+        SalaryRecord::create([
             'salary_period_id' => $period->id,
             'employee_id' => $employee->id,
             'nip_snapshot' => $employee->nip,
@@ -271,7 +272,7 @@ class SalaryImportTest extends TestCase
             ->assertSee('data gaji')
             ->call('clearAndRestart');
 
-        $this->assertSame(0, \App\Models\SalaryRecord::count());
+        $this->assertSame(0, SalaryRecord::count());
     }
 
     /**
@@ -287,7 +288,7 @@ class SalaryImportTest extends TestCase
         $employeeBaru = Employee::factory()->create(['nip' => '195909091985031005']);
         $period = SalaryPeriod::factory()->create(['bulan' => 8, 'tahun' => 2026]);
 
-        \App\Models\SalaryRecord::create([
+        SalaryRecord::create([
             'salary_period_id' => $period->id,
             'employee_id' => Employee::where('nip', '195708201985031004')->first()->id,
             'nip_snapshot' => '195708201985031004',
@@ -309,7 +310,7 @@ class SalaryImportTest extends TestCase
             ->call('confirmImport')
             ->assertSet('step', 'done');
 
-        $this->assertSame(2, \App\Models\SalaryRecord::where('salary_period_id', $period->id)->count());
+        $this->assertSame(2, SalaryRecord::where('salary_period_id', $period->id)->count());
         $this->assertDatabaseHas('salary_records', ['salary_period_id' => $period->id, 'employee_id' => $employeeBaru->id]);
     }
 
@@ -319,7 +320,7 @@ class SalaryImportTest extends TestCase
         $employee = Employee::factory()->create(['nip' => '195708201985031004']);
         $period = SalaryPeriod::factory()->create(['bulan' => 8, 'tahun' => 2026]);
 
-        \App\Models\SalaryRecord::create([
+        SalaryRecord::create([
             'salary_period_id' => $period->id,
             'employee_id' => $employee->id,
             'nip_snapshot' => $employee->nip,
@@ -339,6 +340,6 @@ class SalaryImportTest extends TestCase
 
         $errors = $component->get('preview')[0]['errors'];
         $this->assertNotEmpty(array_filter($errors, fn ($e) => str_contains($e, 'sudah punya data gaji')));
-        $this->assertSame(1, \App\Models\SalaryRecord::where('salary_period_id', $period->id)->count());
+        $this->assertSame(1, SalaryRecord::where('salary_period_id', $period->id)->count());
     }
 }

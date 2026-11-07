@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\DeductionRecord;
 use App\Models\DeductionType;
 use App\Models\Employee;
 use App\Models\EmployeeStatus;
@@ -172,7 +173,7 @@ class RecurringDeductionManagementTest extends TestCase
             'dibuat_oleh' => User::factory()->create()->id,
         ]);
 
-        \App\Models\DeductionRecord::create([
+        DeductionRecord::create([
             'salary_record_id' => $salaryRecord->id,
             'deduction_type_id' => $type->id,
             'recurring_deduction_id' => $rd->id,

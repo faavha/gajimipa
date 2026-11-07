@@ -55,6 +55,9 @@ jobs:
       - name: Test
         run: php artisan test
 
+      - name: Gaya kode (Pint)
+        run: ./vendor/bin/pint --test
+
   audit:
     runs-on: ubuntu-latest
 

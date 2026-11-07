@@ -11,6 +11,7 @@ use App\Models\SalaryRecord;
 use App\Models\User;
 use App\Support\AuditLogger;
 use App\Support\SafeExcelReader;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -69,7 +70,7 @@ class DeductionImportService
      *     lebih cocok.
      * Kolom yang tidak cukup mirip dibiarkan '— Abaikan —'.
      *
-     * @param  \Illuminate\Support\Collection<int,DeductionType>  $deductionTypes
+     * @param  Collection<int,DeductionType>  $deductionTypes
      * @return array<int,string>
      */
     public function guessMapping(array $headers, $deductionTypes): array

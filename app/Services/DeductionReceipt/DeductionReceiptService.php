@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Support\AuditLogger;
 use App\Support\Settings;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,7 @@ class DeductionReceiptService
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder<DeductionRecord>
+     * @return Builder<DeductionRecord>
      */
     public function recordsForPeriod(SalaryPeriod $period)
     {

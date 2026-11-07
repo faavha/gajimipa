@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\DeductionReceipt;
 use App\Models\DeductionRecord;
 use App\Models\DeductionType;
 use App\Models\Employee;
@@ -119,7 +120,7 @@ class DeductionReceiptTest extends TestCase
         $this->assertSame(2, $dibuat1);
         $this->assertSame(1, $dibuat2);
         $this->assertSame(0, $dibuat3);
-        $this->assertSame(3, \App\Models\DeductionReceipt::count());
+        $this->assertSame(3, DeductionReceipt::count());
     }
 
     public function test_verifikator_cannot_access_receipt_management_page(): void

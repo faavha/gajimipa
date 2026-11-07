@@ -7,6 +7,7 @@ use App\Models\DeductionRecord;
 use App\Models\DeductionType;
 use App\Models\EmailLog;
 use App\Models\Employee;
+use App\Models\Payslip;
 use App\Models\SalaryComponent;
 use App\Models\SalaryPeriod;
 use App\Models\SalaryRecord;
@@ -94,7 +95,7 @@ class EmailServiceTest extends TestCase
         return $record;
     }
 
-    private function buatSlip(SalaryPeriod $period, ?Employee $employee = null): \App\Models\Payslip
+    private function buatSlip(SalaryPeriod $period, ?Employee $employee = null): Payslip
     {
         $record = $this->buatSalaryRecord($period, $employee);
 

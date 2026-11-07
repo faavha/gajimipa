@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\DeductionRecord;
 use App\Models\DeductionType;
 use App\Models\Employee;
+use App\Models\Payslip;
 use App\Models\SalaryComponent;
 use App\Models\SalaryPeriod;
 use App\Models\SalaryRecord;
@@ -130,7 +131,7 @@ class PayslipTest extends TestCase
         $this->assertSame(2, $dibuat1);
         $this->assertSame(1, $dibuat2);
         $this->assertSame(0, $dibuat3);
-        $this->assertSame(3, \App\Models\Payslip::count());
+        $this->assertSame(3, Payslip::count());
     }
 
     public function test_verifikator_cannot_access_payslip_management_page(): void

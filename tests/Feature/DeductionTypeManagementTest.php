@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\DeductionType;
 use App\Models\DeductionRecord;
+use App\Models\DeductionType;
 use App\Models\Employee;
 use App\Models\SalaryPeriod;
 use App\Models\SalaryRecord;

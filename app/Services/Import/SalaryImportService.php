@@ -175,7 +175,7 @@ class SalaryImportService
             $expected = $totalResmi['basis'] === 'kotor' ? $totalPenghasilan : $bersihHitung;
 
             if (! $totalError && round($expected, 2) !== round((float) $totalFileValue, 2)) {
-                $errors[] = "Total tidak sesuai — hitung ulang Rp".number_format($expected, 0, ',', '.')." tapi file bilang Rp".number_format((float) $totalFileValue, 0, ',', '.')." (kolom {$totalResmi['label']}).";
+                $errors[] = 'Total tidak sesuai — hitung ulang Rp'.number_format($expected, 0, ',', '.').' tapi file bilang Rp'.number_format((float) $totalFileValue, 0, ',', '.')." (kolom {$totalResmi['label']}).";
             }
 
             $bersihFile = $totalResmi['basis'] === 'bersih' ? $totalFileValue : $bersihHitung;
@@ -353,7 +353,7 @@ class SalaryImportService
                 ], fn ($v) => filled($v)));
             }
 
-            AuditLogger::log('Import Gaji Pusat', "Import gaji pusat ({$template->label()}) untuk periode {$period->nama_periode}: ".count($preview)." baris berhasil.", [
+            AuditLogger::log('Import Gaji Pusat', "Import gaji pusat ({$template->label()}) untuk periode {$period->nama_periode}: ".count($preview).' baris berhasil.', [
                 'salary_period_id' => $period->id,
                 'salary_import_id' => $salaryImport->id,
                 'format' => $template->code(),

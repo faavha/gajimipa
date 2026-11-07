@@ -15,9 +15,7 @@ class PayslipEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public Payslip $payslip)
-    {
-    }
+    public function __construct(public Payslip $payslip) {}
 
     public function envelope(): Envelope
     {

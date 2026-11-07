@@ -2,7 +2,6 @@
 
 namespace App\Services\Report;
 
-use App\Models\DeductionRecord;
 use App\Models\SalaryPeriod;
 use App\Models\SalaryRecord;
 use App\Models\SubmissionRecord;

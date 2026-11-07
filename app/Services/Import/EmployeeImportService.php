@@ -14,6 +14,7 @@ use App\Support\SafeExcelReader;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 /**
  * Import massal Master Pegawai dari Excel (CLAUDE.md STEP 6 "Import jika
@@ -177,13 +178,13 @@ class EmployeeImportService
             ];
 
             $validator = Validator::make($payload, [
-                'nip' => ['required', 'digits_between:8,20', \Illuminate\Validation\Rule::unique('employees', 'nip')->ignore($existing?->id)],
-                'nik' => ['nullable', 'digits:16', \Illuminate\Validation\Rule::unique('employees', 'nik')->ignore($existing?->id)],
+                'nip' => ['required', 'digits_between:8,20', Rule::unique('employees', 'nip')->ignore($existing?->id)],
+                'nik' => ['nullable', 'digits:16', Rule::unique('employees', 'nik')->ignore($existing?->id)],
                 'nama' => ['required', 'string', 'max:150'],
-                'email' => ['nullable', 'email', 'max:150', \Illuminate\Validation\Rule::unique('employees', 'email')->ignore($existing?->id)],
+                'email' => ['nullable', 'email', 'max:150', Rule::unique('employees', 'email')->ignore($existing?->id)],
                 'no_hp' => ['nullable', 'string', 'max:20'],
-                'id_simpeg' => ['nullable', 'string', 'max:30', \Illuminate\Validation\Rule::unique('employees', 'id_simpeg')->ignore($existing?->id)],
-                'npwp' => ['nullable', 'string', 'max:25', \Illuminate\Validation\Rule::unique('employees', 'npwp')->ignore($existing?->id)],
+                'id_simpeg' => ['nullable', 'string', 'max:30', Rule::unique('employees', 'id_simpeg')->ignore($existing?->id)],
+                'npwp' => ['nullable', 'string', 'max:25', Rule::unique('employees', 'npwp')->ignore($existing?->id)],
                 'no_rekening' => ['nullable', 'string', 'max:30'],
                 'nama_rekening' => ['nullable', 'string', 'max:150'],
             ]);

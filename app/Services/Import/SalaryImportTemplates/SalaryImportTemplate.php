@@ -42,8 +42,8 @@ interface SalaryImportTemplate
      * Kolom di file yang jadi "total resmi" untuk validasi silang §12 CLAUDE.md.
      *
      * @return array{column:string,label:string,basis:'kotor'|'bersih'}
-     *               basis 'kotor'  = kolom itu seharusnya == total penghasilan
-     *               basis 'bersih' = kolom itu seharusnya == total penghasilan − total potongan pusat
+     *                                                                  basis 'kotor'  = kolom itu seharusnya == total penghasilan
+     *                                                                  basis 'bersih' = kolom itu seharusnya == total penghasilan − total potongan pusat
      */
     public function totalResmi(): array;
 

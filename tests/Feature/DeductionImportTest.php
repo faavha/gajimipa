@@ -44,7 +44,7 @@ class DeductionImportTest extends TestCase
 
     private function makeExcelUpload(array $rows, string $filename = 'potongan.xlsx'): UploadedFile
     {
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
         $sheet = $spreadsheet->getActiveSheet();
 
         foreach ($rows as $rowIndex => $row) {

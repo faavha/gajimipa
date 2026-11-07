@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Support\SafeExcelReader;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PHPUnit\Framework\TestCase;
@@ -21,15 +22,15 @@ class SafeExcelReaderTest extends TestCase
         $spreadsheet = new Spreadsheet;
         $sheet = $spreadsheet->getActiveSheet();
 
-        $sheet->setCellValueExplicit('A1', 'NIP', \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-        $sheet->setCellValueExplicit('B1', 'Nama', \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-        $sheet->setCellValueExplicit('A2', '123456', \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-        $sheet->setCellValueExplicit('B2', 'Pegawai Uji', \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit('A1', 'NIP', DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit('B1', 'Nama', DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit('A2', '123456', DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit('B2', 'Pegawai Uji', DataType::TYPE_STRING);
 
         // Sel jauh di luar data asli — analog kolom/baris "hantu" yang
         // menyebabkan OOM nyata di server (kolom IV = 256, baris 6000,
         // keduanya di luar batas SafeExcelReader: MAX_COLS=200, MAX_ROWS=5000).
-        $sheet->setCellValueExplicit('IV6000', 'x', \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+        $sheet->setCellValueExplicit('IV6000', 'x', DataType::TYPE_STRING);
 
         $path = tempnam(sys_get_temp_dir(), 'safe_excel_reader_test_').'.xlsx';
         (new Xlsx($spreadsheet))->save($path);

@@ -36,7 +36,7 @@ return new class extends Migration
                 // — jangan tebak, hentikan migrasi supaya operator/pengembang
                 // memeriksa manual dulu (lebih aman drpd salah gabung data
                 // tarif keuangan).
-                throw new \RuntimeException(
+                throw new RuntimeException(
                     'Migrasi dihentikan: ditemukan nominal tarif yang berbeda dalam 1 kelompok golongan untuk deduction_type_id='
                     .$group->first()->deduction_type_id.'. Periksa tabel deduction_rates secara manual sebelum melanjutkan.'
                 );

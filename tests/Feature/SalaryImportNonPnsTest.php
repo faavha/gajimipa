@@ -70,7 +70,7 @@ class SalaryImportNonPnsTest extends TestCase
 
     private function makeExcelUpload(array $rows, string $filename = 'gaji_nonpns.xlsx'): UploadedFile
     {
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
         $sheet = $spreadsheet->getActiveSheet();
 
         foreach ($rows as $rowIndex => $row) {
